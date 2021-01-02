@@ -7,7 +7,7 @@
   <br>
 
   <label for="birth_date">Birth Date</label>
-  <input id="birth_date" type="date" name="cat[date]">
+  <input id="birth_date" type="date" name="cat[birth_date]">
 
   <br>
 
@@ -21,10 +21,9 @@
   <label for="color">Color</label>
   <select id="color" name="cat[color]">
     <option disabled selected>-- Please Select --</option>
-    <option value="black">Black</option>
-    <option value="white">White</option>
-    <option value="gray">Gray</option>
-    <option value="orange">Orange</option>
+        <% Cat::COLORS.each do |color| %>
+            <option value="<%= color %>"><%= color.capitalize %></option>
+        <% end %>
   </select>
 
   <br>
