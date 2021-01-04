@@ -1,6 +1,14 @@
 class Cat < ApplicationRecord
   COLORS = ['black', 'white', 'gray', 'orange']
 
+  has_many(
+    :rental_requests,
+    dependent: :destroy,
+    class_name: "CatRentalRequest",
+    foreign_key: :cat_id,
+    primary_key: :id
+  )
+
   def age
     require 'date'
     now = Time.now.to_date
