@@ -20,6 +20,11 @@ class CatRentalRequest < ApplicationRecord
     end
   end
 
+  def deny!
+    self.status = "DENIED"
+    self.save
+  end
+
   validates :cat_id, :start_date, :end_date, :status, presence: true
   validates :status, inclusion: { in: CatRentalRequest::STATUS,
     message: 'must be a valid status.'}
