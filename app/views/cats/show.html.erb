@@ -41,6 +41,11 @@
     <ul>
       <li>Start Date: <%= request.start_date %></li>  
       <li>End Date: <%= request.end_date %></li>
+      <li>Status: <%= request.status %></li>
+      <% if request.pending? %>
+        <%= link_to '<button type="button">APPROVE</button>'.html_safe, approve_cat_rental_request_url(request.id)%>
+        <%= link_to '<button type="button">DENY</button>'.html_safe, deny_cat_rental_request_url(request.id) %>
+      <% end %>
     </ul>  
     <br>
   <% end %>
