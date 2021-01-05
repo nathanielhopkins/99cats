@@ -1,6 +1,6 @@
 <h1>Rent a Cat!</h1>
 
-<form action="<%= cat_rental_requests_url%>" method="POST">
+<form action="<%= cat_rental_requests_url%>" method="post">
   <label for="select_cat">Select a Cat:</label>
   <select id="select_cat" name="cat_rental_request[cat_id]">
     <option disabled selected>-- Please Select --</option>
@@ -22,5 +22,5 @@
   <br>
   <br>
 
-  <input type="button" value="create rental">
+  <input type="submit" value="create rental">
 </form>
