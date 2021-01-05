@@ -8,6 +8,17 @@ class CatRentalRequest < ApplicationRecord
     primary_key: :id
   )
 
+  def approve!
+    CatRentalRequest.transaction do
+      self.status = 'APPROVED'
+      self.save
+      overlap_pending = overlapping_pending_requests
+      overlap_pending.each do |request|
+        request.status = 'DENIED'
+        request.save
+      end
+    end
+  end
 
   validates :cat_id, :start_date, :end_date, :status, presence: true
   validates :status, inclusion: { in: CatRentalRequest::STATUS,
@@ -23,6 +34,10 @@ class CatRentalRequest < ApplicationRecord
       .where(cat_id: cat_id)
       .where.not('start_date > :end_date OR end_date < :start_date',
                  start_date: start_date, end_date: end_date)
+  end
+
+  def overlapping_pending_requests
+    overlapping_requests.select { |request| request.status == 'PENDING'}
   end
 
   def overlapping_approved_requests
