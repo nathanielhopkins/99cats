@@ -6,6 +6,7 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find_by(id: params[:id])
+    @rental_requests = CatRentalRequest.where(cat_id: @cat.id)
 
     if @cat
       render :show

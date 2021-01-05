@@ -27,3 +27,23 @@
         </tr>
     </tbody>
 </table>
+
+<br>
+<br>
+
+<h3>Rental Requests for <%= @cat.name %>:</h3>
+
+<% if @rental_requests.empty? %>
+  <p> There are no rental requests for <%= @cat.name %></p>
+<% else %>
+  <% @rental_requests.each do |request| %>
+
+    <ul>
+      <li>Start Date: <%= request.start_date %></li>  
+      <li>End Date: <%= request.end_date %></li>
+    </ul>  
+    <br>
+  <% end %>
+<% end %>
+
+<h4><a href="../cats/">< Back</a></h4>
